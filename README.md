@@ -1,6 +1,6 @@
 # Zendesk Search
 
-###Instructions
+## Instructions
 
 Using the provided data (tickets.json and users.json and organization.json ) write a simple command line application to search the data and return the results in a human readable format.
 
