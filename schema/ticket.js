@@ -11,8 +11,8 @@ exports.ticketSchema = {
     submitter_id: {type: Number},
     assignee_id: {type: Number},
     organization_id: {type: Number},
-    tags: [type: String],
+    tags: {type: Array},
     has_incidents: {type: Boolean},
     due_at: {type: String},
     via: {type: String}
-}
+};

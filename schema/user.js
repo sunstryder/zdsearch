@@ -15,7 +15,7 @@ exports.userSchema = {
     phone: {type: String},
     signature: {type: String},
     organization_id: {type: Number},
-    tags: [type: String],
+    tags: {type: Array},
     suspended: {type: Boolean},
     role: {type: String}
-}
+};

@@ -1,6 +1,8 @@
 const vorpal = require('vorpal')();
 const _ = require('lodash');
-const { usersSchema, ticketsSchema, organizationsSchema } = require('./schema/schema.js');
+const { userSchema } = require('./schema/user.js');
+const { ticketSchema } = require('./schema/ticket.js');
+const { organizationSchema } = require('./schema/organization.js');
 const users = require('./data/users.json');
 const tickets = require('./data/tickets.json');
 const organizations = require('./data/organizations.json');
@@ -12,7 +14,7 @@ vorpal
 		let searchField = args.field;
 		let searchValue = args.value;
 
-		if(searchField in organizationsSchema){
+		if(searchField in organizationSchema){
 			this.log('Oooh, I found something! Here are your results: ');
 			let searchResults = _.filter(organizations,[searchField,searchValue]);
 			this.log(searchResults);
@@ -29,7 +31,7 @@ vorpal
 		let searchField = args.field;
 		let searchValue = args.value;
 
-		if(searchField in usersSchema){
+		if(searchField in userSchema){
 			this.log('Oooh, I found something! Here are your results: ');
 			let searchResults = _.filter(users,[searchField,searchValue]);
 			this.log(searchResults);
@@ -46,7 +48,7 @@ vorpal
 		let searchField = args.field;
 		let searchValue = args.value;
 
-		if(searchField in ticketsSchema){
+		if(searchField in ticketSchema){
 			this.log('Oooh, I found something! Here are your results: ');
 			let searchResults = _.filter(tickets,[searchField,searchValue]);
 			this.log(searchResults);
@@ -64,13 +66,20 @@ const welcomeText = `
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Welcome to ZDSEARCH!
-You can search any fields within organizations, tickets or users.
+- You can search any fields within organizations, tickets or users.
+- enter 'help' at any time to see commands that can be used!
+- type 'quit' to exit the application
 
 Usage:
-- zdsearch$ <user, organization, ticket>
-You can press tab to autocomplete the command
+- zdsearch$ <dataset {users, tickets, organizations} > [field] [value]
 
-enter 'help' at any time to see commands that can be used!
+examples:
+
+users _id 23
+organizations details MegaCorp
+tickets priority high
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 `;
 
 console.log(welcomeText);
