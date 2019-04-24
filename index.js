@@ -1,5 +1,6 @@
 const vorpal = require('vorpal')();
 const _ = require('lodash');
+const prettyjson = require('prettyjson');
 const { userSchema } = require('./schema/user.js');
 const { ticketSchema } = require('./schema/ticket.js');
 const { organizationSchema } = require('./schema/organization.js');
@@ -17,7 +18,7 @@ vorpal
 		if(searchField in organizationSchema){
 			this.log('Oooh, I found something! Here are your results: ');
 			let searchResults = _.filter(organizations,[searchField,searchValue]);
-			this.log(searchResults);
+			this.log(prettyjson.render(searchResults));
 		} else {
 			this.log('No organizations like that I\'m afraid');
 		}
@@ -34,7 +35,7 @@ vorpal
 		if(searchField in userSchema){
 			this.log('Oooh, I found something! Here are your results: ');
 			let searchResults = _.filter(users,[searchField,searchValue]);
-			this.log(searchResults);
+			this.log(prettyjson.render(searchResults));
 		} else {
 			this.log('No users like that I\'m afraid');
 		}
@@ -51,12 +52,21 @@ vorpal
 		if(searchField in ticketSchema){
 			this.log('Oooh, I found something! Here are your results: ');
 			let searchResults = _.filter(tickets,[searchField,searchValue]);
-			this.log(searchResults);
+			this.log(prettyjson.render(searchResults));
 		} else {
 			this.log('No tickets like that I\'m afraid');
 		}
 		callback();
 	});
+
+// Catch non commands inputs.
+// vorpal
+// 	.catch('[words...]', 'Catches incorrect commands')
+// 	.action(function (args, callback) {
+// 		this.log(args.words.join(' ') + ' is not a valid command.');
+// 		callback();	
+// 	});
+
 
 // Initial display: show this when app is started
 const welcomeText = `
