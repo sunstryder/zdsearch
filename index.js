@@ -1,13 +1,10 @@
 const vorpal = require('vorpal')();
-const _ = require('lodash');
 const prettyjson = require('prettyjson');
 
 //utils
 const { findMatches } = require('./utils/helpers.js');
-
 //messages
-const { userFields, ticketFields, organizationFields } = require('./constants/messages.js');
-
+const { userFields, ticketFields, organizationFields, welcomeText } = require('./constants/messages.js');
 //schemas
 const { userSchema } = require('./schema/user.js');
 const { ticketSchema } = require('./schema/ticket.js');
@@ -18,13 +15,12 @@ const users = require('./data/users.json');
 const tickets = require('./data/tickets.json');
 const organizations = require('./data/organizations.json');
 
-// Query for organisation
+// command for searching organizations
 vorpal
-	.command('organizations [field] [value]', 'Searches for a value of a field in Organizations')
+	.command('organizations <field> <value>', 'Searches for a value of a field in Organizations')
 	.action(function(args, callback){
 		let searchField = args.field;
 		let searchValue = args.value;
-
 		if(searchField in organizationSchema){
 			let searchResults = findMatches(organizationSchema, organizations, searchField, searchValue);
 			this.log(`Searching in "${searchField}"... `);
@@ -40,9 +36,9 @@ vorpal
 		callback();
 	});
 
-// Query for users
+// Command for searching users
 vorpal
-	.command('users [field] [value]', 'searches for a value of a field in "user".')
+	.command('users <field> <value>', 'searches for a value of a field in "user".')
 	.action(function(args,callback){ 
 		let searchField = args.field;
 		let searchValue = args.value;
@@ -61,13 +57,12 @@ vorpal
 		callback();
 	});
 
-// Query for tickets
+// Command for searching tickets
 vorpal
-	.command('tickets [field] [value]', 'searches for a value of a field in "tickets".')
+	.command('tickets <field> <value>', 'searches for a value of a field in "tickets".')
 	.action(function(args,callback){
 		let searchField = args.field;
 		let searchValue = args.value;
-
 		if(searchField in ticketSchema){
 			this.log(`Searching in "${searchField}"... `);
 			let searchResults = findMatches(ticketSchema, tickets, searchField, searchValue);
@@ -92,39 +87,6 @@ vorpal
 		this.log(organizationFields);
 		callback();
 	});
-
-// Catch non commands inputs.
-// vorpal
-// 	.catch('[words...]', 'Catches incorrect commands')
-// 	.action(function (args, callback) {
-// 		this.log(args.words.join(' ') + ' is not a valid command.');
-// 		callback();	
-// 	});
-
-
-// Initial display: show this when app is started
-const welcomeText = `
-  
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                    ZDSEARCH                    
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Welcome to ZDSEARCH!
-- You can search any fields within organizations, tickets or users.
-- enter 'help' at any time to see commands that can be used!
-- type 'quit' to exit the application
-
-Usage:
-- zdsearch$ <dataset {users, tickets, organizations} > [field] [value]
-
-examples:
-
-users _id 23
-organizations details MegaCorp
-tickets priority high
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-`;
 
 console.log(welcomeText);
 
