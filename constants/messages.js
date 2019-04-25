@@ -31,23 +31,17 @@ examples:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 `;
 
-exports.userFields = `
+exports.allFields = `
+Here are all the searchable fields:
+
 ~~~~~~~~~~~ User Fields ~~~~~~~~~~~~~
 
 ${prettyjson.render(_.keys(userSchema))}
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-`;
-
-exports.ticketFields = `
 ~~~~~~~~~~~ Ticket Fields ~~~~~~~~~~~~~
 
 ${prettyjson.render(_.keys(ticketSchema))}
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-`;
-
-exports.organizationFields = `
 ~~~~~~~~~~~ Organization Fields ~~~~~~~~~~~~~
 
 ${prettyjson.render(_.keys(organizationSchema))}

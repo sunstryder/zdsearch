@@ -48,11 +48,11 @@ Afterwards, you'll be able to run the app using
 
 ```<dataset>``` can be `organizations`, `users` or `tickets`. Pressing Tab can autocomplete this command.
 
-```[fields]``` is an attribute that you want to search for. e.g: `_id`, `tags`, `suspended`. You can get the list of searchable fields by running the `fields` command.
+```[fields]``` is an attribute that you want to search for. e.g: `_id`, `tags`, `suspended`. Tab to autocomplete is enabled for this argument.
 
-```[value]``` the value of the attribute you want to find. e.g: 23, howard, true
+```[value]``` the value of the attribute you want to find. e.g: `23`, `howard`, `true`
 
-NB: For empty `[value]` or multi-word `[value]`, wrap the argument in "doublequotes" e.g. : tickets tags "american samoa"
+NB: For empty `[value]` or multi-word `[value]`, wrap the argument in "doublequotes" e.g. : `tickets tags "american samoa"`
 
 ### Fields
 

@@ -1,4 +1,5 @@
 const Joi = require('@hapi/joi');
+const _ = require('lodash');
 
 const joiTicketSchema = Joi.object().keys({
 	id: Joi.number(),
@@ -19,4 +20,10 @@ const joiTicketSchema = Joi.object().keys({
 	via: Joi.string()
 });
 
-exports.ticketSchema = Joi.describe(joiTicketSchema).children;
+const ticketSchema = Joi.describe(joiTicketSchema).children;
+const ticketFields = _.keys(ticketSchema);
+
+module.exports = {
+    ticketFields,
+    ticketSchema
+};

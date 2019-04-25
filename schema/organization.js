@@ -1,4 +1,5 @@
 const Joi = require('@hapi/joi');
+const _ = require('lodash');
 
 const joiOrganizationSchema = Joi.object().keys({
 	_id: Joi.number(),
@@ -12,4 +13,10 @@ const joiOrganizationSchema = Joi.object().keys({
 	tags: Joi.array(),
 });
 
-exports.organizationSchema = Joi.describe(joiOrganizationSchema).children;
+const organizationSchema = Joi.describe(joiOrganizationSchema).children;
+const organizationFields = _.keys(organizationSchema);
+
+module.exports = {
+    organizationFields,
+    organizationSchema
+};

@@ -4,11 +4,11 @@ const prettyjson = require('prettyjson');
 //utils
 const { findMatches } = require('./utils/helpers.js');
 //messages
-const { userFields, ticketFields, organizationFields, welcomeText } = require('./constants/messages.js');
+const { allFields, welcomeText } = require('./constants/messages.js');
 //schemas
-const { userSchema } = require('./schema/user.js');
-const { ticketSchema } = require('./schema/ticket.js');
-const { organizationSchema } = require('./schema/organization.js');
+const { userSchema, userFields } = require('./schema/user.js');
+const { ticketSchema, ticketFields } = require('./schema/ticket.js');
+const { organizationSchema, organizationFields } = require('./schema/organization.js');
 
 //data
 const users = require('./data/users.json');
@@ -18,6 +18,7 @@ const organizations = require('./data/organizations.json');
 // command for searching organizations
 vorpal
 	.command('organizations <field> <value>', 'Searches for a value of a field in Organizations')
+	.autocomplete(organizationFields)
 	.action(function(args, callback){
 		let searchField = args.field;
 		let searchValue = args.value;
@@ -39,6 +40,7 @@ vorpal
 // Command for searching users
 vorpal
 	.command('users <field> <value>', 'searches for a value of a field in "user".')
+	.autocomplete(userFields)
 	.action(function(args,callback){ 
 		let searchField = args.field;
 		let searchValue = args.value;
@@ -60,6 +62,7 @@ vorpal
 // Command for searching tickets
 vorpal
 	.command('tickets <field> <value>', 'searches for a value of a field in "tickets".')
+	.autocomplete(ticketFields)
 	.action(function(args,callback){
 		let searchField = args.field;
 		let searchValue = args.value;
@@ -81,10 +84,7 @@ vorpal
 vorpal
 	.command('fields', 'shows all searchable fields.')
 	.action(function(args, callback){
-		this.log('Here are all the searchable fields: ');
-		this.log(userFields);
-		this.log(ticketFields);
-		this.log(organizationFields);
+		this.log(allFields);
 		callback();
 	});
 

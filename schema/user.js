@@ -1,4 +1,5 @@
 const Joi = require('@hapi/joi');
+const _ = require('lodash');
 
 const joiUserSchema = Joi.object().keys({
 	_id: Joi.number(),
@@ -22,4 +23,10 @@ const joiUserSchema = Joi.object().keys({
 	role: Joi.string()
 });
 
-exports.userSchema = Joi.describe(joiUserSchema).children;
+const userSchema = Joi.describe(joiUserSchema).children;
+const userFields = _.keys(userSchema);
+
+module.exports = {
+    userFields,
+    userSchema
+};
