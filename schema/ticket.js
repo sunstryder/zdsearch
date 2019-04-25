@@ -1,18 +1,22 @@
-exports.ticketSchema = {
-    _id: {type: Number},
-    url: {type: String},
-    external_id: {type: String},
-    created_at: {type: String},
-    type: {type: String},
-    subject: {type: String},
-    description: {type: String},
-    priority: {type: String},   
-    status: {type: String},
-    submitter_id: {type: Number},
-    assignee_id: {type: Number},
-    organization_id: {type: Number},
-    tags: {type: Array},
-    has_incidents: {type: Boolean},
-    due_at: {type: String},
-    via: {type: String}
-};
+const Joi = require('@hapi/joi');
+
+const joiTicketSchema = Joi.object().keys({
+	id: Joi.number(),
+	url: Joi.string(),
+	external_id: Joi.string(),
+	created_at: Joi.string(),
+	type: Joi.string(),
+	subject: Joi.string(),
+	description: Joi.string(),
+	priority: Joi.string(),   
+	status: Joi.string(),
+	submitter_id: Joi.number(),
+	assignee_id: Joi.number(),
+	organization_id: Joi.number(),
+	tags: Joi.array(),
+	has_incidents: Joi.boolean(),
+	due_at: Joi.string(),
+	via: Joi.string()
+});
+
+exports.ticketSchema = Joi.describe(joiTicketSchema).children;
