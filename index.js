@@ -5,6 +5,9 @@ const prettyjson = require('prettyjson');
 //utils
 const { findMatches } = require('./utils/helpers.js');
 
+//messages
+const { userFields, ticketFields, organizationFields } = require('./constants/messages.js');
+
 //schemas
 const { userSchema } = require('./schema/user.js');
 const { ticketSchema } = require('./schema/ticket.js');
@@ -66,8 +69,8 @@ vorpal
 		let searchValue = args.value;
 
 		if(searchField in ticketSchema){
-			let searchResults = findMatches(ticketSchema, tickets, searchField, searchValue);
 			this.log(`Searching in "${searchField}"... `);
+			let searchResults = findMatches(ticketSchema, tickets, searchField, searchValue);
 			if(searchResults.length !== 0){
 				this.log('Results found: ');
 				this.log(prettyjson.render(searchResults));
@@ -77,6 +80,16 @@ vorpal
 		} else {
 			this.log(`No field "${searchField}" found.`);
 		}
+		callback();
+	});
+
+vorpal
+	.command('fields', 'shows all searchable fields.')
+	.action(function(args, callback){
+		this.log('Here are all the searchable fields: ');
+		this.log(userFields);
+		this.log(ticketFields);
+		this.log(organizationFields);
 		callback();
 	});
 
