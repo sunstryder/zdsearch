@@ -4,7 +4,7 @@
   "description": "a command line search app for ZD coding challenge",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node index.js"
   },
   "author": "",
@@ -12,6 +12,7 @@
   "dependencies": {
     "@hapi/joi": "^15.0.0",
     "lodash": "^4.17.11",
+    "mocha": "^6.1.4",
     "prettyjson": "^1.2.1",
     "vorpal": "^1.12.0"
   },
