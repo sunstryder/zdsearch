@@ -1,14 +1,24 @@
 # Zendesk Search
 
-## Starting up
+## Setting up and testing
 
 First, install dependencies using npm:
 
-`npm i`
+```
+npm i
+```
 
 Afterwards, you'll be able to run the app using 
 
-`npm start`
+```
+npm start
+```
+
+You can run the tests by using:
+
+```
+npm test
+```
 
 ## Usage
 
