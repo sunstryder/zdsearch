@@ -3,7 +3,7 @@ const _ = require('lodash');
 const prettyjson = require('prettyjson');
 
 //utils
-const { arrayToLowerCase } = require('./utils/helpers.js');
+const { findMatches } = require('./utils/helpers.js');
 
 //schemas
 const { userSchema } = require('./schema/user.js');
@@ -19,20 +19,33 @@ const organizations = require('./data/organizations.json');
 vorpal
 	.command('organizations [field] [value]', 'Searches for a value of a field in Organizations')
 	.action(function(args, callback){
-		let searchField = String(args.field).toLowerCase();
-		let searchValue = String(args.value).toLowerCase();
+		let searchField = args.field;
+		let searchValue = args.value;
 
 		if(searchField in organizationSchema){
-			let searchResults;
+			let searchResults = findMatches(organizationSchema, organizations, searchField, searchValue);
 			this.log(`Searching in "${searchField}"... `);
-			if (searchField === 'tags' || searchField === 'domain_names'){
-				searchResults = _.filter(organizations, function(obj){
-					return _.includes(arrayToLowerCase(obj[searchField]),searchValue);
-				});
+			if(searchResults.length !== 0){
+				this.log('Results found: ');
+				this.log(prettyjson.render(searchResults));
 			} else {
-				searchResults = _.filter(organizations,[searchField,searchValue]);
+				this.log(`No organizations found with field "${searchField}" of value "${searchValue}"`);
 			}
+		} else {
+			this.log(`No field "${searchField}" found.`);
+		}
+		callback();
+	});
 
+// Query for users
+vorpal
+	.command('users [field] [value]', 'searches for a value of a field in "user".')
+	.action(function(args,callback){ 
+		let searchField = args.field;
+		let searchValue = args.value;
+		if(searchField in userSchema){
+			this.log(`Searching in "${searchField}"... `);
+			let searchResults = findMatches(userSchema, users, searchField, searchValue);
 			if(searchResults.length !== 0){
 				this.log('Results found: ');
 				this.log(prettyjson.render(searchResults));
@@ -45,31 +58,6 @@ vorpal
 		callback();
 	});
 
-// Query for users
-vorpal
-	.command('users [field] [value]', 'searches for a value of a field in "user".')
-	.action(function(args,callback){ // Do the search within here.
-		let searchField = args.field;
-		let searchValue = args.value;
-		// This part is repeated across all the datasets, split it out.
-		if(searchField in userSchema){
-			this.log(`Searching in "${searchField}"... `);
-			let searchResults = _.filter(users,function(obj){
-				// allows for case insensitive searching
-				return String(obj[searchField]).toLowerCase() === String(searchValue).toLowerCase();
-			}); 
-			if(searchResults.length !== 0){
-				this.log('Results found: ');
-				this.log(prettyjson.render(searchResults));
-			} else {
-				this.log(`No users found with field "${searchField}" of value "${searchValue}"`);
-			}
-		} else {
-			this.log(`No field "${searchField}" found. type 'users -help' to get a list of fields you can search.`);
-		}
-		callback();
-	});
-
 // Query for tickets
 vorpal
 	.command('tickets [field] [value]', 'searches for a value of a field in "tickets".')
@@ -78,11 +66,16 @@ vorpal
 		let searchValue = args.value;
 
 		if(searchField in ticketSchema){
-			this.log('Oooh, I found something! Here are your results: ');
-			let searchResults = _.filter(tickets,[searchField,searchValue]);
-			this.log(prettyjson.render(searchResults));
+			let searchResults = findMatches(ticketSchema, tickets, searchField, searchValue);
+			this.log(`Searching in "${searchField}"... `);
+			if(searchResults.length !== 0){
+				this.log('Results found: ');
+				this.log(prettyjson.render(searchResults));
+			} else {
+				this.log(`No tickets found with field "${searchField}" of value "${searchValue}"`);
+			}
 		} else {
-			this.log('No tickets like that I\'m afraid');
+			this.log(`No field "${searchField}" found.`);
 		}
 		callback();
 	});
