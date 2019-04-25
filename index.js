@@ -1,9 +1,16 @@
 const vorpal = require('vorpal')();
 const _ = require('lodash');
 const prettyjson = require('prettyjson');
+
+//utils
+const { arrayToLowerCase } = require('./utils/helpers.js');
+
+//schemas
 const { userSchema } = require('./schema/user.js');
 const { ticketSchema } = require('./schema/ticket.js');
 const { organizationSchema } = require('./schema/organization.js');
+
+//data
 const users = require('./data/users.json');
 const tickets = require('./data/tickets.json');
 const organizations = require('./data/organizations.json');
@@ -12,15 +19,28 @@ const organizations = require('./data/organizations.json');
 vorpal
 	.command('organizations [field] [value]', 'Searches for a value of a field in Organizations')
 	.action(function(args, callback){
-		let searchField = args.field;
-		let searchValue = args.value;
+		let searchField = String(args.field).toLowerCase();
+		let searchValue = String(args.value).toLowerCase();
 
 		if(searchField in organizationSchema){
-			this.log('Oooh, I found something! Here are your results: ');
-			let searchResults = _.filter(organizations,[searchField,searchValue]);
-			this.log(prettyjson.render(searchResults));
+			let searchResults;
+			this.log(`Searching in "${searchField}"... `);
+			if (searchField === 'tags' || searchField === 'domain_names'){
+				searchResults = _.filter(organizations, function(obj){
+					return _.includes(arrayToLowerCase(obj[searchField]),searchValue);
+				});
+			} else {
+				searchResults = _.filter(organizations,[searchField,searchValue]);
+			}
+
+			if(searchResults.length !== 0){
+				this.log('Results found: ');
+				this.log(prettyjson.render(searchResults));
+			} else {
+				this.log(`No users found with field "${searchField}" of value "${searchValue}"`);
+			}
 		} else {
-			this.log('No organizations like that I\'m afraid');
+			this.log(`No field "${searchField}" found.`);
 		}
 		callback();
 	});
