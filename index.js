@@ -31,13 +31,21 @@ vorpal
 	.action(function(args,callback){ // Do the search within here.
 		let searchField = args.field;
 		let searchValue = args.value;
-
+		// This part is repeated across all the datasets, split it out.
 		if(searchField in userSchema){
-			this.log('Oooh, I found something! Here are your results: ');
-			let searchResults = _.filter(users,[searchField,searchValue]);
-			this.log(prettyjson.render(searchResults));
+			this.log(`Searching in "${searchField}"... `);
+			let searchResults = _.filter(users,function(obj){
+				// allows for case insensitive searching
+				return String(obj[searchField]).toLowerCase() === String(searchValue).toLowerCase();
+			}); 
+			if(searchResults.length !== 0){
+				this.log('Results found: ');
+				this.log(prettyjson.render(searchResults));
+			} else {
+				this.log(`No users found with field "${searchField}" of value "${searchValue}"`);
+			}
 		} else {
-			this.log('No users like that I\'m afraid');
+			this.log(`No field "${searchField}" found. type 'users -help' to get a list of fields you can search.`);
 		}
 		callback();
 	});
