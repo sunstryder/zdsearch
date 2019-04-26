@@ -8,6 +8,7 @@ ZDsearch is a node application, please ensure `node` and `npm` are installed on 
 - I used `lodash` for utilities because I'm not a madman: https://lodash.com/
 - I used `prettyjson` for formatting the output: https://github.com/rafeca/prettyjson
 - I used `mocha` as my test runner: https://github.com/mochajs/mocha
+- I used `chai` as my assertion library: https://github.com/chaijs/chai
 - I used `@hapi/joi` to construct my data schemas: https://github.com/hapijs/joi
 
 ## Setting up and testing
