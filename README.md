@@ -1,8 +1,20 @@
-# Zendesk Search
+# ZDSearch
+
+ZDsearch is a node application, please ensure `node` and `npm` are installed on your machine in order to run the app.
+
+## Libraries Used
+
+- I've made use of `vorpal` for the CLI framework : https://github.com/dthree/vorpal
+- I used `lodash` for utilities because I'm not a madman: https://lodash.com/
+- I used `prettyjson` for formatting the output: https://github.com/rafeca/prettyjson
+- I used `mocha` as my test runner: https://github.com/mochajs/mocha
+- I used `@hapi/joi` to construct my data schemas: https://github.com/hapijs/joi
 
 ## Setting up and testing
 
-First, install dependencies using npm:
+Clone or download this repository onto your machine, then from the main project directiory:
+
+Install dependencies using npm:
 
 ```
 npm i
@@ -60,7 +72,7 @@ npm test
 
 ```[fields]``` is an attribute that you want to search for. e.g: `_id`, `tags`, `suspended`. Tab to autocomplete is enabled for this argument.
 
-```[value]``` the value of the attribute you want to find. e.g: `23`, `howard`, `true`
+```[value]``` the value of the attribute you want to find. e.g: `23`, `howard`, `true`. Can't read your mind to autocomplete this one I'm afraid.
 
 NB: For empty `[value]` or multi-word `[value]`, wrap the argument in "doublequotes" e.g. : `tickets tags "american samoa"`
 
@@ -106,3 +118,4 @@ Enter ```help``` at any time to get the full list of commands.
 ### Quitting
 
 Enter `quit` or `exit` to shut down the app.
+

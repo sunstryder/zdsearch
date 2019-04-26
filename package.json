@@ -1,13 +1,13 @@
 {
   "name": "zdsearch",
   "version": "0.0.1",
-  "description": "a command line search app for ZD coding challenge",
+  "description": "a command line search app for Zendesk Melbourne coding challenge",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
     "start": "node index.js"
   },
-  "author": "",
+  "author": "Tony Sun <sunstryder@outlook.com>",
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^15.0.0",
