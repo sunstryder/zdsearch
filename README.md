@@ -13,7 +13,7 @@ ZDsearch is a node application, please ensure `node` and `npm` are installed on 
 
 ## Setting up and testing
 
-Clone or download this repository onto your machine, then from the main project directiory:
+Clone or download this repository onto your machine, then from the main project directory:
 
 Install dependencies using npm:
 
@@ -21,7 +21,7 @@ Install dependencies using npm:
 npm i
 ```
 
-Afterwards, you'll be able to run the app using 
+Afterwards, you'll be able to run the app using:
 
 ```
 npm start
@@ -33,7 +33,7 @@ You can run the tests by using:
 npm test
 ```
 
-You can lint all .js files by running:
+You can lint all `.js` files by running:
 
 ```
 npm run lint
@@ -120,7 +120,7 @@ NB: For empty `[value]` or multi-word `[value]`, wrap the argument in "doublequo
 
 ### Help
 
-Enter ```help``` at any time to get the full list of commands.
+Enter `help` at any time to get the full list of commands.
 
 ### Quitting
 
