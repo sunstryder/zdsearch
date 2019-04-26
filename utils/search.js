@@ -8,8 +8,8 @@ const arrayToLowerCase = (array) => {
 };
 
 exports.findMatches = (schema, dataset, field, value) => {
-    let matches = [];
-    let fieldType = schema[field].type;
+	let matches = [];
+	let fieldType = schema[field].type;
 	if (fieldType === 'array'){
 		matches = _.filter(dataset, (obj) => _.includes(arrayToLowerCase(obj[field]), value));
 	} else {
