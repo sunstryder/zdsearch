@@ -33,6 +33,12 @@ You can run the tests by using:
 npm test
 ```
 
+You can lint all .js files by running:
+
+```
+npm run lint
+```
+
 ## Usage
 
 `zdsearch` takes commands using the following syntax:
