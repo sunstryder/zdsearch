@@ -27,6 +27,6 @@ const userSchema = Joi.describe(joiUserSchema).children;
 const userFields = _.keys(userSchema);
 
 module.exports = {
-    userFields,
-    userSchema
+	userFields,
+	userSchema
 };

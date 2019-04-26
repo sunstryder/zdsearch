@@ -17,6 +17,6 @@ const organizationSchema = Joi.describe(joiOrganizationSchema).children;
 const organizationFields = _.keys(organizationSchema);
 
 module.exports = {
-    organizationFields,
-    organizationSchema
+	organizationFields,
+	organizationSchema
 };

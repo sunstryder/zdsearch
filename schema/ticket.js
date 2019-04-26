@@ -24,6 +24,6 @@ const ticketSchema = Joi.describe(joiTicketSchema).children;
 const ticketFields = _.keys(ticketSchema);
 
 module.exports = {
-    ticketFields,
-    ticketSchema
+	ticketFields,
+	ticketSchema
 };
