@@ -10,10 +10,11 @@ const arrayToLowerCase = (array) => {
 exports.findMatches = (schema, dataset, field, value) => {
 	let matches = [];
 	let fieldType = schema[field].type;
+	let lowerValue = String(value).toLowerCase();
 	if (fieldType === 'array'){
-		matches = _.filter(dataset, (obj) => _.includes(arrayToLowerCase(obj[field]), value));
+		matches = _.filter(dataset, (obj) => _.includes(arrayToLowerCase(obj[field]), lowerValue));
 	} else {
-		matches = _.filter(dataset,(obj) => String(obj[field]).toLowerCase() === String(value).toLowerCase());
+		matches = _.filter(dataset,(obj) => String(obj[field]).toLowerCase() === lowerValue);
 	}
 	return matches;
 };

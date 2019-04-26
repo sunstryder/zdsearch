@@ -7,7 +7,7 @@ const { userSchema } = require('../schema/user.js');
 describe('Search Users', () => {
 	const testData = {
 		email: 'louisastephenson@flotonic.com',
-        email_empty: '',
+        email_empty: undefined,
         tags: 'glenVille',
 	};
     

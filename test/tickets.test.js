@@ -7,7 +7,7 @@ const { ticketSchema } = require('../schema/ticket.js');
 describe('Search Tickets', () => {
 	const testData = {
 		type: 'problem',
-		tags_multi: 'new yOrk',
+		tags_multi: 'nEw YoRk',
 		description: 'Velit Lorem laboris',
 	};
 	describe('Searching for multiple entities with the same value: zdsearch$ tickets type problem', () => {
@@ -15,7 +15,7 @@ describe('Search Tickets', () => {
 			assert.equal(findMatches(ticketSchema, TICKET_MOCK, 'type', testData.type).length,2);
 		});
 	});
-	describe('Searching on a multi-world array field: zdsearch$ tickets tags "new york"', () => {
+	describe('Searching on a multi-world array field: zdsearch$ tickets tags "nEw YoRk"', () => {
 		it('Should match multi-word values regardless of letter case', () => {
 			assert.equal(findMatches(ticketSchema, TICKET_MOCK, 'tags', testData.tags_multi).length, 1);
 		});
