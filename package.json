@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^15.0.0",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.19",
     "prettyjson": "^1.2.1",
     "vorpal": "^1.12.0"
   },
