@@ -11,7 +11,7 @@
   "author": "Tony Sun <sunstryder@outlook.com>",
   "license": "ISC",
   "dependencies": {
-    "@hapi/joi": "^15.0.0",
+    "@hapi/joi": "^15.1.1",
     "lodash": "^4.17.13",
     "prettyjson": "^1.2.1",
     "vorpal": "^1.12.0"
